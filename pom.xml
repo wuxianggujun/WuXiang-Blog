@@ -11,7 +11,7 @@
     <groupId>com.wuxianggujun</groupId>
     <artifactId>WuXiang-Blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>WuXiang-Blog</name>
     <description>WuXiang-Blog</description>
 
@@ -32,12 +32,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework</groupId>-->
-<!--            <artifactId>spring-context</artifactId>-->
-<!--            <version>5.3.20</version>-->
-<!--        </dependency>-->
-
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
         <!--            <artifactId>spring-boot-starter-security</artifactId>-->
@@ -54,7 +48,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>2.0.3</version>
+            <version>2.0.6</version>
         </dependency>
 
         <!--druid-->
@@ -63,7 +57,7 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.2.9</version>
         </dependency>
-            
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,22 +65,25 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
         <!--mysql驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -98,16 +95,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.security</groupId>-->
-        <!--            <artifactId>spring-security-test</artifactId>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
 
     </dependencies>
 
@@ -124,6 +111,9 @@
     </dependencyManagement>
 
     <build>
+
+        <finalName>${project.artifactId}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -136,18 +126,64 @@
                 </configuration>
             </plugin>
 
+<!--            &lt;!&ndash; 基于maven-jar-plugin插件实现把依赖jar定义写入输出jar的META-INFO/MANIFEST文件 &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>2.4</version>-->
+<!--            </plugin>-->
+
+            <!-- 拷贝项目所有依赖jar文件到构建lib目录下 -->
             <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!--
+                            各子模块按照实际层级定义各模块对应的属性值，检查所有微服务模块依赖jar文件合并复制到同一个目录
+                            详见各子模块中 boot-jar-output 属性定义
+                            -->
+                            <outputDirectory>devops/lib</outputDirectory>
+                            <excludeTransitive>false</excludeTransitive>
+                            <stripVersion>false</stripVersion>
+                            <silent>false</silent>
+                        </configuration>
+
+                    </execution>
+                </executions>
             </plugin>
 
+            <!-- Spring Boot模块jar构建 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.7.RELEASE</version>
+                <version>2.7.0</version>
                 <configuration>
                     <mainClass>com.wuxianggujun.wuxiangblog.WuXiangBlogApplication</mainClass>
+                    <includes>
+                        <!-- 不存在的include引用，相当于排除所有maven依赖jar，没有任何三方jar文件打入输出jar -->
+                        <include>
+                            <groupId>null</groupId>
+                            <artifactId>null</artifactId>
+                        </include>
+                    </includes>
+                    <layout>ZIP</layout>
+                    <!--
+                                  基于maven-jar-plugin输出微服务jar文件进行二次spring boot重新打包文件的输出目录
+                                  所有微服务构建输出jar文件统一输出到与lib同一个目录，便于共同引用同一个lib目录
+                                  详见各子模块中boot-jar-output属性定义
+                                  -->
+                    <!--  -->
+                    <outputDirectory>devops</outputDirectory>
+
                 </configuration>
                 <executions>
                     <execution>
