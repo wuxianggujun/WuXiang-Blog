@@ -3,5 +3,6 @@
 采用技术 Druid
 Mybatis
 等
+MyBatis是一个半自动的ORM(Object Relation Mapping)框架
 # 延伸阅读
 
