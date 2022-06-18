@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuxianggujun.wuxiangblog.mapper.UserMapper">
+    <!--  int add(User user);
+    useGeneratedKeys 开启某个字段的值自增
+    keyProperty属性:标签将表中的哪个字段作为主键进行递增
+    -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user (nickname, password)
+        values ('admin', '123456');
+    </insert>
+</mapper>

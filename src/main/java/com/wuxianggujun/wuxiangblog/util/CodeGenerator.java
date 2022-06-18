@@ -1,8 +1,5 @@
 package com.wuxianggujun.wuxiangblog.util;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.generator.AutoGenerator;
-
 import java.util.Scanner;
 
 public class CodeGenerator {
@@ -14,9 +11,9 @@ public class CodeGenerator {
         System.out.println(help.toString());
         if (scanner.hasNext()){
             String input = scanner.next();
-            if (StringUtils.isNotEmpty(input)){
-                return input;
-            }
+//            if (StringUtils.isNotEmpty(input)){
+//                return input;
+//            }
         }
         throw new RuntimeException("请输入正确的"+line+"! ");
     }

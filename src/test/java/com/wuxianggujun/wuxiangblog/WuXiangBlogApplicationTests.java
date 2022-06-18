@@ -8,6 +8,9 @@ class WuXiangBlogApplicationTests {
 
     @Test
     void contextLoads() {
+        //加载
+
+
     }
 
 }
