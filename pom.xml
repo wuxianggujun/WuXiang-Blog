@@ -86,6 +86,7 @@
             <version>2.2.2</version>
         </dependency>
 
+
         <!--mybatis plus-->
 
 <!--        <dependency>-->
@@ -112,6 +113,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.8.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
 
         <!--        添加aop库-->

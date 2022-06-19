@@ -12,4 +12,5 @@ public class WuXiangBlogApplication {
         SpringApplication.run(WuXiangBlogApplication.class, args);
     }
 
+
 }
