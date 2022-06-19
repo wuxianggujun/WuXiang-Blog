@@ -3,6 +3,7 @@ package com.wuxianggujun.wuxiangblog.config;
 import com.wuxianggujun.wuxiangblog.handler.UserLoginInterceptor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,10 +22,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
      *
      * @param registry 注册表
      */
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new UserLoginInterceptor())
+//                .addPathPatterns("/user/**")
+//                .excludePathPatterns("/user/login","/user/register");//开放登录路径
+//    }
+
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new UserLoginInterceptor())
-                .addPathPatterns("/user/**")
-                .excludePathPatterns("/user/login","/user/register");//开放登录路径
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET","HEAD","POST","PUT","DELETE","OPTIONS")
+                .allowCredentials(true)
+                .maxAge(3600)
+                .allowedHeaders("*");
     }
+
+
 }
