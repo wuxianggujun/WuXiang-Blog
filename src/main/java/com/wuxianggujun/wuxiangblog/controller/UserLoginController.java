@@ -54,7 +54,7 @@ public class UserLoginController {
 //        return map;
 //    }
 //
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     public ResultInfo login(User user, HttpServletResponse response) {
         Map<String, Object> map = userService.login(user);
         //将token存入Http的header中
