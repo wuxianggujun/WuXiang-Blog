@@ -1,5 +1,6 @@
 package com.wuxianggujun.wuxiangblog;
 
+import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

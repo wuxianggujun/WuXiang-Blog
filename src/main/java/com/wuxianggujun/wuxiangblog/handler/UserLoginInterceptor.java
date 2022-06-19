@@ -1,5 +1,7 @@
 package com.wuxianggujun.wuxiangblog.handler;
 
+import com.wuxianggujun.wuxiangblog.exception.ApiException;
+import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,21 +14,26 @@ import javax.servlet.http.HttpServletResponse;
  * @author 无相孤君
  * @date 2022/06/19
  */
-public class LoginHandlerInterceptor implements HandlerInterceptor {
+public class UserLoginInterceptor implements HandlerInterceptor {
 
 
     //目标方法执行之前执行
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Object user = request.getSession().getAttribute("loginUser");
-        if (user == null) {
-            //未登录
-            response.sendRedirect("/login");
-            return false;
-        } else {
-            //已登录
-            return true;
+        //http的header中获取token
+        String token = request.getHeader(JWTUtils.USER_LOGIN_TOKEN);
+        //token不存在
+        if (token == null || token.equals("")) throw new ApiException("请先登录");
+        //验证token
+        String sub = JWTUtils.validateToken(token);
+        if (sub == null || sub.equals(""))
+            throw new ApiException("token验证失败");
+        //更新token有效时间（如果需要更新其实就是产生一个新的token）
+        if (JWTUtils.isNeedUpdate(token)) {
+            String newToken = JWTUtils.createToken(sub);
+            response.setHeader(JWTUtils.USER_LOGIN_TOKEN, newToken);
         }
+        return true;
     }
 
     @Override
