@@ -11,4 +11,8 @@
         insert into t_user (nickname, password)
         values ('admin', '123456');
     </insert>
+
+    <select id="queryByName" parameterType="com.wuxianggujun.wuxiangblog.entity.User" resultType="com.wuxianggujun.wuxiangblog.entity.User">
+
+    </select>
 </mapper>

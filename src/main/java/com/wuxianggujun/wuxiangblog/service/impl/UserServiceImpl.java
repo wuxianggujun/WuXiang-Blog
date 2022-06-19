@@ -39,4 +39,10 @@ public class UserServiceImpl implements UserService {
         map.put("token", token);
         return map;
     }
+
+    @Override
+    public void register(User user) {
+        userDao.register(user);
+    }
+
 }

@@ -1,7 +1,8 @@
 package com.wuxianggujun.wuxiangblog.mapper;
 
 import com.wuxianggujun.wuxiangblog.entity.User;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,10 +29,16 @@ public interface UserMapper {
 
     /**
      * 插入用户的数据
+     *
      * @param user 用户
      * @return int 受影响的行数
      */
     int add(User user);
+
+    @Insert("INSERT INTO wuxiangblog.t_user (nickname, password, username) VALUES(#{nickname},#{password},#{username});")
+    //加入该注解可以保存对象后，查看对象插入id
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void register(User user);
 
     /**
      * 按名称查询
@@ -40,4 +47,9 @@ public interface UserMapper {
      * @return {@link User}
      */
     User queryByName(String name);
+
+    //查询用户名是否存在
+    User findUserByName(String name);
+
+
 }
