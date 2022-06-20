@@ -10,4 +10,5 @@ public interface UserService {
 
     //注册
     void register(User user);
+
 }

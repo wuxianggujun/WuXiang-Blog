@@ -1,5 +1,11 @@
 package com.wuxianggujun.wuxiangblog.result;
 
+/**
+ * 封装创建Result对象工具类
+ *
+ * @author 无相孤君
+ * @date 2022/06/20
+ */
 public class ResultGenerator {
 
     private static final String DEFAULT_SUCCESS_MESSAGE = "Success";
