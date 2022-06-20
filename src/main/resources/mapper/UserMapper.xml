@@ -12,40 +12,21 @@
         values ('admin', '123456');
     </insert>
 
-    <insert id="register" parameterType="com.wuxianggujun.wuxiangblog.entity.User">
-        INSERT INTO wuxiangblog.t_user
-            (avatar, create_time, email, nickname, password, `type`, update_time, username)
-        VALUES ('', '', '', '', '', 0, '', '');
-    </insert>
 
-    <select id="queryByName" parameterType="com.wuxianggujun.wuxiangblog.entity.User"
-            resultType="com.wuxianggujun.wuxiangblog.entity.User">
-        SELECT id,
-               avatar,
-               create_time,
-               email,
-               nickname,
-               password,
-               `type`,
-               update_time,
-               username
-        FROM wuxiangblog.t_user;
-    </select>
-
-    <select id="findUserByName" parameterType="com.wuxianggujun.wuxiangblog.entity.User"
-            resultType="com.wuxianggujun.wuxiangblog.entity.User">
-        SELECT id,
-               avatar,
-               create_time,
-               email,
-               nickname,
-               password,
-               `type`,
-               update_time,
-               username
-        FROM wuxiangblog.t_user
-        WHERE username = #{username};
-    </select>
+    <!--    <select id="findUserByName" parameterType="com.wuxianggujun.wuxiangblog.entity.User"-->
+    <!--            resultType="com.wuxianggujun.wuxiangblog.entity.User">-->
+    <!--        SELECT id,-->
+    <!--               avatar,-->
+    <!--               create_time,-->
+    <!--               email,-->
+    <!--               nickname,-->
+    <!--               password,-->
+    <!--               `type`,-->
+    <!--               update_time,-->
+    <!--               username-->
+    <!--        FROM wuxiangblog.t_user-->
+    <!--        WHERE username = #{username};-->
+    <!--    </select>-->
 
 
 </mapper>

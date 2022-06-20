@@ -27,14 +27,11 @@ public class UserMapperTest {
     @Test
     public void insert() {
         User user = new User();
-        int rows = userMapper.add(user);
-        System.out.println(rows);
 
-        user.setUsername("wuxianggujun");
-        user.setNickname("无相孤君");
+        user.setUsername("wuxianggujun1");
         user.setPassword("3344207732");
-        //userMapper.register(user);
 
+        userMapper.register(user);
         List<User> use = userMapper.queryAll();
         System.out.println(use);
 
