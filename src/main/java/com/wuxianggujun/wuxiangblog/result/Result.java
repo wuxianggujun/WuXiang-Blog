@@ -1,8 +1,9 @@
 package com.wuxianggujun.wuxiangblog.result;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 
-//@JsonSerialize(value = JsonSerialize.Inclusion.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result<T> implements Serializable {
     //返回信息
     private String message = "success";
@@ -12,6 +13,7 @@ public class Result<T> implements Serializable {
     //数据是否正常请求
     private boolean success = false;
     //具体返回的数据
+    //@JsonInclude(JsonInclude.Include.NON_NULL)
     private T detail = null;
 
     public String getMessage() {
