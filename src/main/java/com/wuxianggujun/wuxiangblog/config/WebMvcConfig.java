@@ -16,17 +16,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan("com.wuxianggujun.wuxiangblog")//全局异常处理类需要被扫描才可以
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    /**
-     * 添加拦截器
-     *
-     * @param registry 注册表
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new UserLoginInterceptor())
-                .addPathPatterns("/user/**")
-                .excludePathPatterns("/user/login", "/user/register");//开放登录路径
-    }
+//    /**
+//     * 添加拦截器
+//     *
+//     * @param registry 注册表
+//     */
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new UserLoginInterceptor())
+//                .addPathPatterns("/user/**")
+//                .excludePathPatterns("/user/login", "/user/register");//开放登录路径
+//    }
 
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {

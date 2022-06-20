@@ -31,4 +31,36 @@ public class Result<T> {
     public static Result detail(String data) {
         return new Result(false,0,data,null);
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public T getDetail() {
+        return detail;
+    }
+
+    public void setDetail(T detail) {
+        this.detail = detail;
+    }
 }
