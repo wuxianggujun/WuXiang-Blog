@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 //@Controller
 @RestController
+@RequestMapping("/user")
 public class UserLoginController {
 
     private UserService userService;
@@ -25,7 +27,7 @@ public class UserLoginController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/user/register", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public Result registerUser(User user) {
         userService.register(user);
         return ResultGenerator.getSuccessResult(user);
@@ -36,7 +38,7 @@ public class UserLoginController {
         return ResultGenerator.getSuccessResult();
     }
 
-    @GetMapping("/user/login")
+    @GetMapping("/login")
     public Result login(User user, HttpServletResponse response) {
         Map<String, Object> map = userService.login(user);
         //将token存入Http的header中
@@ -44,7 +46,7 @@ public class UserLoginController {
         return ResultGenerator.getSuccessResult((User) map.get("user"));
     }
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public Result login(String username, String password) {
         User user = new User();
         user.setUsername(username);
