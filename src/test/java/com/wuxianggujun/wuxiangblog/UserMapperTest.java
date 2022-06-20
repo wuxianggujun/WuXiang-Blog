@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 //表示当前的类是一个测试类,不会随着项目一起打包
 @SpringBootTest
 //表示启动这个单元测试类是不能运行的，需要传递一个参数，必须是SpringRunner的实例类型
@@ -27,6 +29,19 @@ public class UserMapperTest {
         User user = new User();
         int rows = userMapper.add(user);
         System.out.println(rows);
+
+        user.setUsername("wuxianggujun");
+        user.setNickname("无相孤君");
+        user.setPassword("3344207732");
+        //userMapper.register(user);
+
+        List<User> use = userMapper.queryAll();
+        System.out.println(use);
+
+        User cao = userMapper.findUserByName("wxgj");
+        System.out.println(cao);
+
+
     }
 
 }

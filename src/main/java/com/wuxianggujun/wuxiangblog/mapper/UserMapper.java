@@ -1,8 +1,7 @@
 package com.wuxianggujun.wuxiangblog.mapper;
 
 import com.wuxianggujun.wuxiangblog.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public interface UserMapper {
      * @return {@link List}<{@link User}>
      */
     //查询
+    @Select("SELECT id, avatar, create_time, email, nickname, password, `type`, update_time, username FROM wuxiangblog.t_user;")
     List<User> queryAll();
 
     /**
@@ -35,9 +35,9 @@ public interface UserMapper {
      */
     int add(User user);
 
-    @Insert("INSERT INTO wuxiangblog.t_user (nickname, password, username) VALUES(#{nickname},#{password},#{username});")
-    //加入该注解可以保存对象后，查看对象插入id
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    //    @Insert("INSERT INTO wuxiangblog.t_user (nickname, password, username) VALUES(#{nickname},#{password},#{username});")
+//    //加入该注解可以保存对象后，查看对象插入id
+//    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void register(User user);
 
     /**
@@ -49,7 +49,7 @@ public interface UserMapper {
     User queryByName(String name);
 
     //查询用户名是否存在
-    User findUserByName(String name);
+    User findUserByName(String username);
 
 
 }
