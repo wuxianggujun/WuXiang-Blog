@@ -1,6 +1,6 @@
 package com.wuxianggujun.wuxiangblog.result;
 
-public class ResultGenerator{
+public class ResultGenerator {
 
     private static final String DEFAULT_SUCCESS_MESSAGE = "Success";
 
@@ -25,6 +25,13 @@ public class ResultGenerator{
     public static <T> Result<T> getFailResult(String message) {
         return new Result<T>()
                 .setCode(ResultCode.FAIL.code)
+                .setSuccess(false)
+                .setMessage(message);
+    }
+
+    public static <T> Result<T> getFailResult(int code, String message) {
+        return new Result<T>()
+                .setCode(code)
                 .setSuccess(false)
                 .setMessage(message);
     }
