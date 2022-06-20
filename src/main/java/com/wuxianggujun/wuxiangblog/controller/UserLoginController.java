@@ -43,11 +43,13 @@ public class UserLoginController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestParam String username, @RequestParam String password) {
+    public Result login(@RequestParam String username, @RequestParam String password,HttpServletResponse response) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         Map<String, Object> map = userService.login(user);
+        //将token存入Http的header中
+        response.setHeader(JWTUtils.USER_LOGIN_TOKEN, (String) map.get("token"));
         return ResultGenerator.getSuccessResult((User) map.get("user"));
     }
 
