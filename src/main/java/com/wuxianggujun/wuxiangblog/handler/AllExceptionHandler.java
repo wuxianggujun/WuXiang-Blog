@@ -1,7 +1,8 @@
 package com.wuxianggujun.wuxiangblog.handler;
 
 import com.wuxianggujun.wuxiangblog.exception.ApiException;
-import com.wuxianggujun.wuxiangblog.pojo.Result;
+import com.wuxianggujun.wuxiangblog.result.Result;
+import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,13 +27,13 @@ public class AllExceptionHandler {
     @ResponseBody//返回json数据
     public Result doException(Exception ex) {
         ex.printStackTrace();
-        return Result.fail(-999, "系统异常");
+        return ResultGenerator.getFailResult("系统异常");
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(value = ApiException.class)
     public Result handler(ApiException ex) {
-        return Result.fail(401, ex.getMessage());
+        return ResultGenerator.getFailResult(ex.getMessage());
     }
 
 }
