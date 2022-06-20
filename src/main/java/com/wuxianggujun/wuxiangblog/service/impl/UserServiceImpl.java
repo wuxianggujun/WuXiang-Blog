@@ -26,11 +26,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> login(User user) {
         //根据接受用户密码查询数据库
-        User userDb = userDao.findUserByName(user.getUsername());
+        User userDb = userDao.findUserByUserName(user.getUsername());
         if (userDb == null) {
             //注册用户
-            //int count = userDao.add(user);
-            //if (count < 1) throw new ApiException("注册异常!");
+            int count = userDao.register(user);
+            if (count < 1) throw new ApiException("注册异常!");
         }
         //将id存入token中
         String token = JWTUtils.createToken(userDb.getId().toString());

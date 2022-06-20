@@ -28,16 +28,19 @@ public class UserMapperTest {
     public void insert() {
         User user = new User();
 
-        user.setUsername("wuxianggujun1");
+        user.setUsername("wuxianggujun1124");
         user.setPassword("3344207732");
 
-        userMapper.register(user);
+        int register = userMapper.register(user);
+        System.out.println(register);
+
         List<User> use = userMapper.queryAll();
         System.out.println(use);
 
-        User cao = userMapper.findUserByName("wxgj");
+        User cao = userMapper.findUserByUserName(user.getUsername());
         System.out.println(cao);
 
+        //System.out.println(userMapper.deleteUserById(user.getId()));
 
     }
 

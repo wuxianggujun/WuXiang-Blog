@@ -1,10 +1,7 @@
 package com.wuxianggujun.wuxiangblog.mapper;
 
 import com.wuxianggujun.wuxiangblog.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,17 +38,21 @@ public interface UserMapper {
     @Select("SELECT id, avatar, create_time, email, nickname, password, `type`, update_time, username FROM wuxiangblog.t_user;")
     List<User> queryAll();
 
-    //    @Insert("INSERT INTO wuxiangblog.t_user (nickname, password, username) VALUES(#{nickname},#{password},#{username});")
-//    //加入该注解可以保存对象后，查看对象插入id
-//    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id"
-
+    // @Insert("INSERT INTO wuxiangblog.t_user (nickname, password, username) VALUES(#{nickname},#{password},#{username});")
+    // 加入该注解可以保存对象后，查看对象插入id
+    // @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id"
     @Insert("INSERT INTO wuxiangblog.t_user (password, username) VALUES(#{password},#{username});")
-    void register(User user);
+    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
+    int register(User user);
 
 
     @Select(" SELECT id,avatar, create_time,email, nickname,password,`type`, update_time,username FROM wuxiangblog.t_user WHERE username = #{username}")
         //查询用户名是否存在
-    User findUserByName(String username);
+    User findUserByUserName(String username);
+
+
+    @Delete("DELETE FROM wuxiangblog.t_user WHERE id=#{id};")
+    boolean deleteUserById(Long id);
 
 
 }
