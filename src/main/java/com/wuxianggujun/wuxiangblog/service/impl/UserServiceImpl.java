@@ -3,6 +3,7 @@ package com.wuxianggujun.wuxiangblog.service.impl;
 import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.exception.ApiException;
 import com.wuxianggujun.wuxiangblog.mapper.UserMapper;
+import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.UserService;
 import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
             if (count < 1) throw new ApiException("注册异常!");
         }
         //将id存入token中
-        String token = JWTUtils.createToken(userDb.getId().toString());
+        String token = JWTUtils.createToken(userDb.getUsername().toString());
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("user", userDb);
         map.put("token", token);
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(User user) {
+        System.out.println(user.toString());
         userDao.register(user);
     }
 

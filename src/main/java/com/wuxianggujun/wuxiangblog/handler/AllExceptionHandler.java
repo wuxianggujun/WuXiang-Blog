@@ -26,8 +26,9 @@ public class AllExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody//返回json数据
     public Result doException(Exception ex) {
+        logger.error(ex.getMessage());
         ex.printStackTrace();
-        return ResultGenerator.getFailResult("系统异常");
+        return ResultGenerator.getFailResult(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
