@@ -25,9 +25,23 @@ public class UserLoginController {
     }
 
     @PostMapping(value = "/register")
-    public Result registerUser(@RequestBody User user) {
-        userService.register(user);
-        return ResultGenerator.getSuccessResult(user);
+    public Result registerUser(@RequestBody User user, HttpServletResponse response) {
+        Map<String, Object> map = userService.register(user);
+        return getResult(response,"注册成功!", map);
+    }
+
+    //封装一下
+    private Result getResult(HttpServletResponse response,String message,Map<String, Object> map) {
+        if (map.containsKey("result")) {
+            return ResultGenerator.getFailResult((String) map.get("result"));
+        }
+        if (map.containsKey("token")){
+            if (StrUtil.isNotBlank((map.get("token").toString()))) {
+                //将token存入Http的header中
+                response.setHeader(JWTUtils.header, (String) map.get("token"));
+            }
+        }
+        return ResultGenerator.getSuccessResult(message,(User) map.get("user"));
     }
 
     @GetMapping(value = "/status")
@@ -38,14 +52,7 @@ public class UserLoginController {
     @PostMapping("/login")
     public Result loginUser(@RequestBody User user, HttpServletResponse response) {
         Map<String, Object> map = userService.login(user);
-        if (map.containsKey("result")) {
-            return ResultGenerator.getFailResult((String) map.get("result"));
-        }
-        if (!StrUtil.isBlank(map.get("token").toString())) {
-            //将token存入Http的header中
-            response.setHeader(JWTUtils.header, (String) map.get("token"));
-        }
-        return ResultGenerator.getSuccessResult((User) map.get("user"));
+        return getResult(response,"登陆成功！", map);
     }
 
 //    @PostMapping("/login")

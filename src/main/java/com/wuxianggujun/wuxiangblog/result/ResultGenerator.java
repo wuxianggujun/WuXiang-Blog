@@ -27,6 +27,15 @@ public class ResultGenerator {
                 .setDetail(data);
     }
 
+    //成功返回数据
+    public static <T> Result<T> getSuccessResult(String message, T data) {
+        return new Result<T>()
+                .setCode(ResultCode.SUCCESS.code)
+                .setSuccess(true)
+                .setMessage(message)
+                .setDetail(data);
+    }
+
     // 失败
     public static <T> Result<T> getFailResult(String message) {
         return new Result<T>()

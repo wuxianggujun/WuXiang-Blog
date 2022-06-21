@@ -41,15 +41,37 @@ public class UserServiceImpl implements UserService {
                 map.put("user", userDb);
                 map.put("result", "账号或者密码错误");
             }
+            return map;
         }
+        map.put("result", "用户不存在");
         return map;
     }
 
     @Override
     public Map<String, Object> register(User user) {
         Map<String, Object> map = new HashMap<String, Object>();
-        System.out.println(user.toString());
-        userDao.insertUser(user);
+        //查询用户名，判断存不存在
+        User userDb = userDao.findUserByUserName(user.getUsername());
+        if (ObjectUtil.isNotNull(userDb)) {
+            map.put("result", "用户已经存在");
+            return map;
+        }
+        if (StrUtil.isNotEmpty(user.getUsername()) && StrUtil.isNotEmpty(user.getPassword())) {
+            //密码加密
+            String password = user.getPassword();
+            user.setPassword("123456789");
+            int rows = userDao.insertUser(user);
+            if (rows < 1) {
+                map.put("result", "数据插入失败！");
+                return map;
+            }
+            //将UserName存入token中
+            String token = JWTUtils.createToken(user.getUsername());
+            map.put("user", user);
+            map.put("token", token);
+        } else {
+            map.put("result", "用户名或密码不能为null");
+        }
         return map;
     }
 
