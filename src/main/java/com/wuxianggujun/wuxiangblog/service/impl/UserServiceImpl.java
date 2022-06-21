@@ -2,6 +2,7 @@ package com.wuxianggujun.wuxiangblog.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.digest.DigestUtil;
 import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.mapper.UserMapper;
 import com.wuxianggujun.wuxiangblog.service.UserService;
@@ -59,7 +60,8 @@ public class UserServiceImpl implements UserService {
         if (StrUtil.isNotEmpty(user.getUsername()) && StrUtil.isNotEmpty(user.getPassword())) {
             //密码加密
             String password = user.getPassword();
-            user.setPassword("123456789");
+            String digestHex = DigestUtil.md5Hex(password);
+            user.setPassword(digestHex);
             int rows = userDao.insertUser(user);
             if (rows < 1) {
                 map.put("result", "数据插入失败！");
