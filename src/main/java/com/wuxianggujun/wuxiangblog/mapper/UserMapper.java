@@ -16,16 +16,8 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    //结果映射列表
-    @Results({ //2
-            @Result(property = "id", column = "id"), //2
-            @Result(property = "username", column = "username"),
-            @Result(property = "nickname", column = "nickname"),
-            @Result(property = "password", column = "password"),
-            @Result(property = "email", column = "email"),
-            @Result(property = "create_time", column = "create_time"),
-            @Result(property = "type", column = "type"),
-    })
+    //结果映射列表,全部字段度需要映射，不然问题太他吗麻烦了
+
     /**
      * 查询所有
      * MyBatis面向接口编程的两个一致
@@ -36,22 +28,26 @@ public interface UserMapper {
      */
     //查询
     @Select("SELECT id, avatar, create_time, email, nickname, password, `type`, update_time, username FROM wuxiangblog.t_user;")
-    List<User> queryAll();
+    List<User> queryAllUsers();
 
     // @Insert("INSERT INTO wuxiangblog.t_user (nickname, password, username) VALUES(#{nickname},#{password},#{username});")
     // 加入该注解可以保存对象后，查看对象插入id
     // @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id"
-    @Insert("INSERT INTO wuxiangblog.t_user (password, username) VALUES(#{password},#{username});")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    int register(User user);
+    //@Insert("INSERT INTO wuxiangblog.t_user (password, username) VALUES(#{password},#{username});")
+    //@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    // int register(User user);
 
-    //查询用户名是否存在
-//    @Select(" SELECT id,avatar, create_time,email, nickname,password,`type`, update_time,username FROM wuxiangblog.t_user WHERE username = #{username}")
-//    User findUserByUserName(@Param("username") String username);
+    @Insert({"INSERT INTO wuxiangblog.t_user (avatar, create_time, email, nickname, password, update_time, username) VALUES(#{avatar}, #{createTime}, #{email}, #{nickname}, #{password}, #{updateTime}, #{username});"})
+    @Results(id = "datetimeMap", value = {
+            @Result(column = "create_time", property = "createTime"),
+            @Result(column = "update_time", property = "updateTime")
+    })
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    int insertUser(User user);
 
 
     @Delete("DELETE FROM wuxiangblog.t_user WHERE id=#{id};")
-    boolean deleteUserById(Long id);
+    boolean deleteUserById(@Param("id") Long id);
 
     User findUserById(@Param("id") Long id);
 

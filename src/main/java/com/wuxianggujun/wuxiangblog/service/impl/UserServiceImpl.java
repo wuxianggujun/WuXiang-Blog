@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         User userDb = userDao.findUserByUserName(user.getUsername());
         if (userDb == null) {
             //注册用户
-            int count = userDao.register(user);
+            int count = userDao.insertUser(user);
             if (count < 1) throw new ApiException("注册异常!");
         }
         //将id存入token中
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(User user) {
         System.out.println(user.toString());
-        userDao.register(user);
+        userDao.insertUser(user);
     }
 
 }
