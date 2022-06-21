@@ -2,6 +2,7 @@ package com.wuxianggujun.wuxiangblog.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @author 无相孤君
  * @date 2022/06/17
  */
-public class User {
+public class User implements Serializable{
     /**
      * id
      */
@@ -213,23 +214,41 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    /**
-     * 字符串
-     *
-     * @return {@link String}
-     */
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getAvatar() == null) ? 0 : getAvatar().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
+        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        return result;
+    }
+
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", nickname='" + nickname + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", type=" + type +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", avatar=").append(avatar);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", email=").append(email);
+        sb.append(", nickname=").append(nickname);
+        sb.append(", password=").append(password);
+        sb.append(", type=").append(type);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", username=").append(username);
+        sb.append("]");
+        return sb.toString();
     }
+
 }

@@ -7,26 +7,23 @@
     useGeneratedKeys 开启某个字段的值自增
     keyProperty属性:标签将表中的哪个字段作为主键进行递增
     -->
-    <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into t_user (nickname, password)
-        values ('admin', '123456');
-    </insert>
 
+    <select id="findUserById" parameterType="Long" resultType="com.wuxianggujun.wuxiangblog.entity.User">
+        SELECT * FROM wuxiangblog.t_user
+        <trim suffixOverrides="and" prefixOverrides="and">
+            <where>
+                <if test="id!=null">
+                    and id = #{id}
+                </if>
+            </where>
+        </trim>
+    </select>
 
-    <!--    <select id="findUserByName" parameterType="com.wuxianggujun.wuxiangblog.entity.User"-->
-    <!--            resultType="com.wuxianggujun.wuxiangblog.entity.User">-->
-    <!--        SELECT id,-->
-    <!--               avatar,-->
-    <!--               create_time,-->
-    <!--               email,-->
-    <!--               nickname,-->
-    <!--               password,-->
-    <!--               `type`,-->
-    <!--               update_time,-->
-    <!--               username-->
-    <!--        FROM wuxiangblog.t_user-->
-    <!--        WHERE username = #{username};-->
-    <!--    </select>-->
+    <select id="findUserByUserName" parameterType="String" resultType="com.wuxianggujun.wuxiangblog.entity.User">
+        SELECT *
+        FROM wuxiangblog.t_user
+        WHERE username = #{username}
+    </select>
 
 
 </mapper>

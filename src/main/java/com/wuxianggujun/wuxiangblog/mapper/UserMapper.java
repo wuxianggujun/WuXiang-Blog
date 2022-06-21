@@ -42,17 +42,20 @@ public interface UserMapper {
     // 加入该注解可以保存对象后，查看对象插入id
     // @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id"
     @Insert("INSERT INTO wuxiangblog.t_user (password, username) VALUES(#{password},#{username});")
-    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int register(User user);
 
-
-    @Select(" SELECT id,avatar, create_time,email, nickname,password,`type`, update_time,username FROM wuxiangblog.t_user WHERE username = #{username}")
-        //查询用户名是否存在
-    User findUserByUserName(String username);
+    //查询用户名是否存在
+//    @Select(" SELECT id,avatar, create_time,email, nickname,password,`type`, update_time,username FROM wuxiangblog.t_user WHERE username = #{username}")
+//    User findUserByUserName(@Param("username") String username);
 
 
     @Delete("DELETE FROM wuxiangblog.t_user WHERE id=#{id};")
     boolean deleteUserById(Long id);
+
+    User findUserById(@Param("id") Long id);
+
+    User findUserByUserName(@Param("username") String username);
 
 
 }
