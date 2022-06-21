@@ -37,7 +37,7 @@ public interface UserMapper {
     //@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     // int register(User user);
 
-    @Insert({"INSERT INTO wuxiangblog.t_user (avatar, create_time, email, nickname, password, update_time, username) VALUES(#{avatar}, #{createTime}, #{email}, #{nickname}, #{password}, #{updateTime}, #{username});"})
+    @Insert({"INSERT INTO wuxiangblog.t_user (avatar, create_time, email, nickname, password, username) VALUES(#{avatar}, #{createTime}, #{email}, #{nickname}, #{password}, #{username});"})
     @Results(id = "datetimeMap", value = {
             @Result(column = "create_time", property = "createTime"),
             @Result(column = "update_time", property = "updateTime")

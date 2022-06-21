@@ -1,5 +1,6 @@
 package com.wuxianggujun.wuxiangblog.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.result.Result;
 import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
@@ -35,10 +36,15 @@ public class UserLoginController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestBody User user, HttpServletResponse response) {
+    public Result loginUser(@RequestBody User user, HttpServletResponse response) {
         Map<String, Object> map = userService.login(user);
-        //将token存入Http的header中
-        response.setHeader(JWTUtils.header, (String) map.get("token"));
+        if (map.containsKey("result")) {
+            return ResultGenerator.getFailResult((String) map.get("result"));
+        }
+        if (!StrUtil.isBlank(map.get("token").toString())) {
+            //将token存入Http的header中
+            response.setHeader(JWTUtils.header, (String) map.get("token"));
+        }
         return ResultGenerator.getSuccessResult((User) map.get("user"));
     }
 

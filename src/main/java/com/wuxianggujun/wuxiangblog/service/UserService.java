@@ -9,6 +9,6 @@ public interface UserService {
     Map<String, Object> login(User user);
 
     //注册
-    void register(User user);
+    Map<String,Object> register(User user);
 
 }
