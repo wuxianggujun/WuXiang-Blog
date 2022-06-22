@@ -50,14 +50,14 @@ mybatis:
 logging:
   level:
     root: info
-      org:
-        springframework:
-          web:
-            servlet:
-              DispatcherServlet: info
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: info
 
-          boot:
-            autoconfigure: error
+        boot:
+          autoconfigure: error
 
 
   file:
