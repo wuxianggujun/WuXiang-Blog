@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
-    private BlogService blogDao;
+    private BlogService blogService;
 
     @Autowired
     public void setBlogDao(BlogService blogDao) {
-        this.blogDao = blogDao;
+        this.blogService = blogDao;
     }
 
     @GetMapping("/{id}/delete")
