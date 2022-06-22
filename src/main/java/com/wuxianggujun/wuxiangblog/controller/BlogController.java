@@ -1,20 +1,35 @@
 package com.wuxianggujun.wuxiangblog.controller;
 
+import com.wuxianggujun.wuxiangblog.entity.Blog;
+import com.wuxianggujun.wuxiangblog.result.Result;
+import com.wuxianggujun.wuxiangblog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-//@RestController
-////@RequestMapping("/blog")
-//public class BlogController {
-//    private BlogService blogDao;
-//
-//    @Autowired
-//    public void setBlogDao(BlogService blogDao) {
-//        this.blogDao = blogDao;
-//    }
-//
-//
-//
-//}
+@RestController
+@RequestMapping("/blog")
+public class BlogController {
+    private BlogService blogDao;
+
+    @Autowired
+    public void setBlogDao(BlogService blogDao) {
+        this.blogDao = blogDao;
+    }
+
+    @GetMapping("/{id}/delete")
+    public Result delete(@PathVariable Long id) {
+        return null;
+    }
+
+
+    @GetMapping("/search")
+    public Result search() {
+        return null;
+    }
+
+    @PostMapping("/{id}/update")
+    public Result update(@RequestBody Blog blog) {
+        return null;
+    }
+
+}

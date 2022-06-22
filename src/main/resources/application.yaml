@@ -1,1 +1,12 @@
 #netty配置
+
+
+
+
+
+#分页插件配置
+pagehelper:
+  dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count = countSql
