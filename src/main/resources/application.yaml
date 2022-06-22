@@ -18,7 +18,7 @@ spring:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
       name: defaultDataSource
-      url: jdbc:mysql://106.13.195.2:3306/wuxiangblog?serverTimezone=UTC
+      url: jdbc:mysql://106.13.195.2:3306/wuxiangblog?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
       username: wuxiangblog
       password: wuxiangblog
       initial-size: 5
@@ -37,10 +37,10 @@ spring:
 
 #分页插件配置
 pagehelper:
-  dialect: mysql
+  helperDialect: mysql
   reasonable: true
-  support-methods-arguments: true
-  params: count = countSql
+  supportMethodsArguments: true
+  params: count=countSql
 
 #mybatis配置
 mybatis:

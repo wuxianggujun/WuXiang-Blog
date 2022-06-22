@@ -1,5 +1,7 @@
 package com.wuxianggujun.wuxiangblog.entity;
 
+import com.wuxianggujun.wuxiangblog.pojo.DetailedBlog;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
