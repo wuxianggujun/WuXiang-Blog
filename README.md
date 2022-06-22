@@ -4,5 +4,6 @@
 Mybatis
 等
 MyBatis是一个半自动的ORM(Object Relation Mapping)框架
+主分支使用mybatis-plus，分支使用mybatis
 # 延伸阅读
 
