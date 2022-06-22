@@ -8,7 +8,8 @@ import java.util.List;
 @Repository
 public interface BlogMapper {
 
-//    List<SearchBlog> listBlogs(SearchBlog searchBlog);
+    //List<SearchBlog> listBlogs(SearchBlog searchBlog);
+    //搜索博客
     List<SearchBlog> searchBlogs(SearchBlog searchBlog);
 
 

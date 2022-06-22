@@ -2,6 +2,7 @@ package com.wuxianggujun.wuxiangblog.service.impl;
 
 import com.wuxianggujun.wuxiangblog.entity.Blog;
 import com.wuxianggujun.wuxiangblog.mapper.BlogMapper;
+import com.wuxianggujun.wuxiangblog.pojo.SearchBlog;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> searchBlogs() {
-        return null;
+    public List<SearchBlog> searchBlogs(SearchBlog searchBlog) {
+        return blogDao.searchBlogs(searchBlog);
     }
 
     @Override

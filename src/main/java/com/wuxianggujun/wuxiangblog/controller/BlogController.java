@@ -3,6 +3,7 @@ package com.wuxianggujun.wuxiangblog.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wuxianggujun.wuxiangblog.entity.Blog;
+import com.wuxianggujun.wuxiangblog.pojo.SearchBlog;
 import com.wuxianggujun.wuxiangblog.result.Result;
 import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
@@ -27,12 +28,12 @@ public class BlogController {
     }
 
 
-    @GetMapping("/search")
-    public Result search(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
+    @PostMapping("/search")
+    public Result search(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum, @RequestBody SearchBlog searchBlog) {
         //分页插件,返回分页数据
-        List<Blog> blogs = blogService.searchBlogs();
+        List<SearchBlog> blogs = blogService.searchBlogs(searchBlog);
         PageHelper.startPage(pageNum, 10);
-        PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
+        PageInfo<SearchBlog> pageInfo = new PageInfo<>(blogs);
         return ResultGenerator.getSuccessResult(pageInfo);
     }
 
