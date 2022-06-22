@@ -40,11 +40,11 @@ public class UserServiceImpl implements UserService {
                 map.put("token", token);
             } else {
                 map.put("user", userDb);
-                map.put("result", "账号或者密码错误");
+                map.put("msg", "账号或者密码错误");
             }
             return map;
         }
-        map.put("result", "用户不存在");
+        map.put("msg", "用户不存在");
         return map;
     }
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         //查询用户名，判断存不存在
         User userDb = userDao.findUserByUserName(user.getUsername());
         if (ObjectUtil.isNotNull(userDb)) {
-            map.put("result", "用户已经存在");
+            map.put("msg", "用户已经存在");
             return map;
         }
         if (StrUtil.isNotEmpty(user.getUsername()) && StrUtil.isNotEmpty(user.getPassword())) {
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
             int rows = userDao.insertUser(user);
             if (rows < 1) {
-                map.put("result", "数据插入失败！");
+                map.put("msg", "数据插入失败！");
                 return map;
             }
             //将UserName存入token中
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
             map.put("user", user);
             map.put("token", token);
         } else {
-            map.put("result", "用户名或密码不能为null");
+            map.put("msg", "用户名或密码不能为null");
         }
         return map;
     }

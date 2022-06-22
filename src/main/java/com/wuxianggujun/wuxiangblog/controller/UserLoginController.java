@@ -32,8 +32,8 @@ public class UserLoginController {
 
     //封装一下
     private Result getResult(HttpServletResponse response,String message,Map<String, Object> map) {
-        if (map.containsKey("result")) {
-            return ResultGenerator.getFailResult((String) map.get("result"));
+        if (map.containsKey("msg")) {
+            return ResultGenerator.getFailResult((String) map.get("msg"));
         }
         if (map.containsKey("token")){
             if (StrUtil.isNotBlank((map.get("token").toString()))) {
