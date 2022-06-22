@@ -1,8 +1,39 @@
+#配置
+
+#应用服务器启动端口
+server:
+  port: 8080
+
+spring:
+  #jackson序列化时间格式转换,全局配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  application:
+    name: WuXiang-Blog
+
+  #数据库配置
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      name: defaultDataSource
+      url: jdbc:mysql://106.13.195.2:3306/wuxiangblog?serverTimezone=UTC
+      username: wuxiangblog
+      password: wuxiangblog
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      filters: stat,wall
+
+  #开启热修复
+  devtools:
+    restart:
+      enabled: true
+
+
 #netty配置
-
-
-
-
 
 #分页插件配置
 pagehelper:
@@ -10,3 +41,26 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count = countSql
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+
+#日志配置
+logging:
+  level:
+    root: info
+      org:
+        springframework:
+          web:
+            servlet:
+              DispatcherServlet: info
+
+          boot:
+            autoconfigure: error
+
+
+  file:
+    name: blog/blog-dev.log
+
+
