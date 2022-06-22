@@ -35,7 +35,7 @@ public class JWTUtils {
     /**
      * token前缀
      */
-    public static String tokenPrefix = "WuXiangBlog ";
+    public static String tokenPrefix = "wxgj ";
 
     /**
      * 签名秘钥
