@@ -48,6 +48,7 @@ build/
 .git
 .idea
 *.iml
+*.log
 .mvn
 mvnw
 *.cmd
