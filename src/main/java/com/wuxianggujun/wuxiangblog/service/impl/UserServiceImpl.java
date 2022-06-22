@@ -62,6 +62,8 @@ public class UserServiceImpl implements UserService {
             String password = user.getPassword();
             String digestHex = DigestUtil.md5Hex(password);
             user.setPassword(digestHex);
+            //还需要创建注册时间
+
             int rows = userDao.insertUser(user);
             if (rows < 1) {
                 map.put("result", "数据插入失败！");
