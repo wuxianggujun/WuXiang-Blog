@@ -41,24 +41,26 @@ spring:
 
 #netty配置
 
-#分页插件配置
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
+##分页插件配置
+#pagehelper:
+#  helperDialect: mysql
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
 
 ##mybatis配置
 #mybatis:
 #  mapper-locations: classpath*:/mapper/**Mapper.xml
 #mybatisplus配置
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*Mapper.xml
-  type-aliases-package: com.wuxianggujun.wuxiangblog.entity.**,com.wuxianggujun.wuxiangblog.entity.**.**
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.wuxianggujun.wuxiangblog.entity.**,com.wuxianggujun.wuxiangblog.entity.**
   #实体扫描，多个package用逗号或者分号分隔
   global-config:
     db-config:
-      id-type: assign_uuid
+      id-type: AUTO
+      logic-delete-value: "Y" # 逻辑已删除值(默认为 Y)
+      logic-not-delete-value: "N" #逻辑未删除值(默认为 N)
       #刷新mapper 调试神器
     refresh: true
   # 原生配置
