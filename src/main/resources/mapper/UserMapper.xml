@@ -8,15 +8,15 @@
     keyProperty属性:标签将表中的哪个字段作为主键进行递增
     -->
     <resultMap id="BaseResultMap" type="com.wuxianggujun.wuxiangblog.entity.User">
-        <id property="id" column="id"/>
-        <result property="avatar" column="avatar"/>
-        <result property="createTime" column="create_time"/>
-        <result property="email" column="email"/>
-        <result property="nickname" column="nickname"/>
-        <result property="password" column="password"/>
-        <result property="type" column="type"/>
-        <result property="updateTime" column="update_time"/>
-        <result property="username" column="username"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
     </resultMap>
 
 

@@ -26,23 +26,13 @@ public class UserMapperTest {
 
     @Test
     public void insert() {
-//        User user = new User();
-//
-//        user.setUsername("wuxianggujun1124");
-//        user.setPassword("3344207732");
-//
-//        int register = userMapper.register(user);
-//        System.out.println(register);
-//
-//        List<User> use = userMapper.queryAll();
-//        System.out.println(use);
-//
-//        User cao = userMapper.findUserByUserName(user.getUsername());
-//        System.out.println(cao);
-
-        User user = userMapper.findUserByUserName("苏杰");
-        System.out.println(user);
-        //System.out.println(userMapper.deleteUserById(user.getId()));
+        User user = new User();
+        user.setUsername("qwert");
+        user.setEmail("1234567890");
+        user.setNickname("wuxiang");
+        user.setAvatar("1xaxsxdXaaxq");
+        user.setPassword("123456789");
+        System.out.println(userMapper.insert(user));
 
     }
 
