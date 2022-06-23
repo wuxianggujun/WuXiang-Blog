@@ -3,6 +3,7 @@ package com.wuxianggujun.wuxiangblog.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.mapper.UserMapper;
 import com.wuxianggujun.wuxiangblog.service.UserService;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Service
 @Transactional//事务注解
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     private UserMapper userDao;
 

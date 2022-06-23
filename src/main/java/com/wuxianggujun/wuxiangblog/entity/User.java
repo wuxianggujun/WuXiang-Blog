@@ -1,5 +1,8 @@
 package com.wuxianggujun.wuxiangblog.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
@@ -11,10 +14,15 @@ import java.util.Date;
  * @author 无相孤君
  * @date 2022/06/17
  */
-public class User implements Serializable{
+@TableName("t_user")
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+
     /**
      * id
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     /**
      * 昵称

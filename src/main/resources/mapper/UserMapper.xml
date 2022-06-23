@@ -7,23 +7,35 @@
     useGeneratedKeys 开启某个字段的值自增
     keyProperty属性:标签将表中的哪个字段作为主键进行递增
     -->
+    <resultMap id="BaseResultMap" type="com.wuxianggujun.wuxiangblog.entity.User">
+        <id property="id" column="id"/>
+        <result property="avatar" column="avatar"/>
+        <result property="createTime" column="create_time"/>
+        <result property="email" column="email"/>
+        <result property="nickname" column="nickname"/>
+        <result property="password" column="password"/>
+        <result property="type" column="type"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="username" column="username"/>
+    </resultMap>
 
-    <select id="findUserById" parameterType="Long" resultType="com.wuxianggujun.wuxiangblog.entity.User">
-        SELECT * FROM wuxiangblog.t_user
-        <trim suffixOverrides="and" prefixOverrides="and">
-            <where>
-                <if test="id!=null">
-                    and id = #{id}
-                </if>
-            </where>
-        </trim>
-    </select>
 
-    <select id="findUserByUserName" parameterType="String" resultType="com.wuxianggujun.wuxiangblog.entity.User">
-        SELECT *
-        FROM wuxiangblog.t_user
-        WHERE username = #{username}
-    </select>
+    <!--    <select id="findUserById" parameterType="Long" resultType="com.wuxianggujun.wuxiangblog.entity.User">-->
+    <!--        SELECT * FROM wuxiangblog.t_user-->
+    <!--        <trim suffixOverrides="and" prefixOverrides="and">-->
+    <!--            <where>-->
+    <!--                <if test="id!=null">-->
+    <!--                    and id = #{id}-->
+    <!--                </if>-->
+    <!--            </where>-->
+    <!--        </trim>-->
+    <!--    </select>-->
+
+    <!--    <select id="findUserByUserName" parameterType="String" resultType="com.wuxianggujun.wuxiangblog.entity.User">-->
+    <!--        SELECT *-->
+    <!--        FROM wuxiangblog.t_user-->
+    <!--        WHERE username = #{username}-->
+    <!--    </select>-->
 
 
 </mapper>

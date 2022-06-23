@@ -1,5 +1,10 @@
 package com.wuxianggujun.wuxiangblog.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +15,12 @@ import java.util.List;
  * @author 无相孤君
  * @date 2022/06/17
  */
-public class Blog {
+@TableName("t_blog")
+public class Blog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     private String title;
     private String content;
@@ -36,7 +46,7 @@ public class Blog {
     private Type type;
     private List<Comment> comments = new ArrayList<>();
 
-    public Blog(){
+    public Blog() {
 
     }
 
