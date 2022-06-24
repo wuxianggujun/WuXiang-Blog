@@ -2,9 +2,7 @@ package com.wuxianggujun.wuxiangblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wuxianggujun.wuxiangblog.entity.Blog;
 import com.wuxianggujun.wuxiangblog.mapper.BlogMapper;
-import com.wuxianggujun.wuxiangblog.pojo.SearchBlog;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
 import com.wuxianggujun.wuxiangblog.vo.SearchBlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, SearchBlog> implements BlogService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, SearchBlogVo> implements BlogService {
     private BlogMapper blogDao;
 
     @Autowired
@@ -22,10 +20,10 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, SearchBlog> impleme
     }
 
     @Override
-     public List<SearchBlogVo> searchBlog(String title) {
+    public List<SearchBlogVo> searchBlog(String title) {
 
         QueryWrapper<SearchBlogVo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(SearchBlogVo::getTypeId,1);
+        queryWrapper.lambda().like(SearchBlogVo::getTitle,"文章");
 
         List<SearchBlogVo> searchBlogVos = blogDao.list(queryWrapper);
 

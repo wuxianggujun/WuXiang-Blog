@@ -15,11 +15,8 @@ public class SearchBlog implements Serializable {
      * 标题
      */
     private String title;
-    /**
-     * id类型
-     */
-    private Long typeId;
 
+    private String name;
 
     public String getTitle() {
         return title;
@@ -30,20 +27,12 @@ public class SearchBlog implements Serializable {
         this.title = title;
     }
 
-    public Long getTypeId() {
-        return typeId;
+
+    public String getName() {
+        return name;
     }
 
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
-    }
-
-
-    @Override
-    public String toString() {
-        return "SearchBlog{" +
-                "title='" + title + '\'' +
-                ", typeId=" + typeId +
-                '}';
+    public void setName(String name) {
+        this.name = name;
     }
 }

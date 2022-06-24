@@ -18,8 +18,7 @@ public class SearchBlogVo implements Serializable {
     private String recommend;
     @TableField("title")
     private String title;
-    @TableField("type_id")
-    private Long typeId;
+
     @TableField("name")
     private String name;
 
@@ -53,14 +52,6 @@ public class SearchBlogVo implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
     }
 
     public String getName() {
