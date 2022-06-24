@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wuxianggujun.wuxiangblog.pojo.SearchBlog;
+import com.wuxianggujun.wuxiangblog.vo.SearchBlogVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public interface BlogMapper extends BaseMapper<SearchBlog> {
 
     //普通查询
     @Select(querySql)
-    List<SearchBlog> list(@Param("ew") Wrapper queryWrapper);
+    List<SearchBlogVo> list(@Param("ew") Wrapper queryWrapper);
 
 
 }

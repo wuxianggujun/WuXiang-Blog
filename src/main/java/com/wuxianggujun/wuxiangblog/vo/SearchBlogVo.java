@@ -3,10 +3,12 @@ package com.wuxianggujun.wuxiangblog.vo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.Serializable;
 import java.util.Date;
 
+//@JsonComponent
 public class SearchBlogVo implements Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
