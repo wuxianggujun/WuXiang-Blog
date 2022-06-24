@@ -1,19 +1,16 @@
 package com.wuxianggujun.wuxiangblog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wuxianggujun.wuxiangblog.entity.Blog;
+import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.pojo.SearchBlog;
+import com.wuxianggujun.wuxiangblog.vo.UserVo;
 
 import java.util.List;
 
-public interface BlogService {
-    //获取博客列表
-    List<Blog> listBlogs();
-   //删除博客
-    boolean deleteBlog(Long id);
-   //搜索博客
-    List<SearchBlog> searchBlogs(SearchBlog searchBlog);
+public interface BlogService extends IService<SearchBlog> {
 
-    //新增博客
-    boolean addBlog(Blog blog);
+    List<UserVo> searchBlog(String title);
+
 
 }

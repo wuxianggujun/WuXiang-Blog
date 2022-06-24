@@ -1,11 +1,16 @@
 package com.wuxianggujun.wuxiangblog.controller;
 
 import com.wuxianggujun.wuxiangblog.entity.Blog;
+import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.pojo.SearchBlog;
 import com.wuxianggujun.wuxiangblog.result.Result;
+import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
+import com.wuxianggujun.wuxiangblog.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/blog")
@@ -24,8 +29,9 @@ public class BlogController {
 
 
     @PostMapping("/search")
-    public Result search(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum, @RequestBody SearchBlog searchBlog) {
-        return null;
+    public Result search(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum, @RequestParam String title) {
+        List<UserVo> searchBlogs = blogService.searchBlog(title);
+        return ResultGenerator.getSuccessResult(searchBlogs);
     }
 
     @PostMapping("/{id}/update")
