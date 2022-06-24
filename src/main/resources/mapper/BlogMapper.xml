@@ -71,4 +71,16 @@
             </if>
         </where>
     </select>
+    <select id="list" resultType="com.wuxianggujun.wuxiangblog.vo.SearchBlogVo">
+        select tb.id,
+               tb.create_time,
+               tb.recommend,
+               tb.title,
+               tb.type_id,
+               tt.id,
+               tt.name
+        from wuxiangblog.t_blog tb
+                 left join wuxiangblog.t_type tt on tb.type_id = tt.id
+
+    </select>
 </mapper>

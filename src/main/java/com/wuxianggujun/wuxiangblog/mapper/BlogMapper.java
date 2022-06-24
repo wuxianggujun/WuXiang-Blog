@@ -23,7 +23,7 @@ public interface BlogMapper extends BaseMapper<SearchBlog> {
     Page<SearchBlog> page(@Param("page") Page page, @Param("ew") Wrapper queryWrapper);
 
     //普通查询
-    @Select(querySql)
+    //@Select(querySql)
     List<SearchBlogVo> list(@Param("ew") Wrapper queryWrapper);
 
 

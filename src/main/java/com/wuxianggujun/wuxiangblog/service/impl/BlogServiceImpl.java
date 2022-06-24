@@ -28,6 +28,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, SearchBlog> impleme
         queryWrapper.lambda().eq(SearchBlogVo::getTypeId,1);
 
         List<SearchBlogVo> searchBlogVos = blogDao.list(queryWrapper);
+
 //
 //        LambdaQueryWrapper<User> wrapper = Wrappers.lambdaQuery(User.class).eq(User::getUsername, title);
 //        //先查询用户数据
