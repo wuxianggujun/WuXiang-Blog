@@ -4,6 +4,7 @@ import com.wuxianggujun.wuxiangblog.entity.Blog;
 import com.wuxianggujun.wuxiangblog.result.Result;
 import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
+import com.wuxianggujun.wuxiangblog.service.SearchBlogService;
 import com.wuxianggujun.wuxiangblog.vo.SearchBlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
+    //博客Service
     private BlogService blogService;
+    //搜索Service
+    private SearchBlogService searchBlogService;
+
+    @Autowired
+    public void setSearchBlogService(SearchBlogService searchBlogService) {
+        this.searchBlogService = searchBlogService;
+    }
+
 
     @Autowired
     public void setBlogDao(BlogService blogDao) {
@@ -28,7 +38,7 @@ public class BlogController {
 
     @PostMapping("/search")
     public Result search(@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum, @RequestParam String title) {
-        List<SearchBlogVo> searchBlogs = blogService.searchBlog(title);
+        List<SearchBlogVo> searchBlogs = searchBlogService.searchBlogs(title);
         return ResultGenerator.getSuccessResult(searchBlogs);
     }
 

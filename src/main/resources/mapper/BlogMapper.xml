@@ -83,4 +83,5 @@
         wuxiangblog.t_type tt on tb.type_id =tt.id
         ${ew.customSqlSegment}
     </select>
+
 </mapper>
