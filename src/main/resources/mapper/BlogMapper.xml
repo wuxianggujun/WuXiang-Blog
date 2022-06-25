@@ -16,29 +16,40 @@
         <result property="username" column="username"/>
     </resultMap>
 
-    <resultMap id="blog" type="com.wuxianggujun.wuxiangblog.entity.Blog">
-        <id property="id" column="id"/>
-        <result property="appreciation" column="appreciation"/>
-        <result property="commentable" column="commentabled"/>
-        <result property="content" column="content"/>
-        <result property="createTime" column="create_time"/>
-        <result property="description" column="description"/>
-        <result property="firstPicture" column="first_picture"/>
-        <result property="flag" column="flag"/>
-        <result property="published" column="published"/>
-        <result property="recommend" column="recommend"/>
-        <result property="shareStatement" column="share_statement"/>
-        <result property="title" column="title"/>
-        <result property="updateTime" column="update_time"/>
-        <result property="views" column="views"/>
-        <result property="typeId" column="type_id"/>
-        <result property="userId" column="user_id"/>
-        <result property="commentCount" column="comment_count"/>
+
+    <resultMap id="BaseResultMap" type="com.wuxianggujun.wuxiangblog.entity.Blog">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="appreciation" column="appreciation" jdbcType="BIT"/>
+        <result property="commentable" column="commentabled" jdbcType="BIT"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="firstPicture" column="first_picture" jdbcType="VARCHAR"/>
+        <result property="flag" column="flag" jdbcType="VARCHAR"/>
+        <result property="published" column="published" jdbcType="BIT"/>
+        <result property="recommend" column="recommend" jdbcType="BIT"/>
+        <result property="shareStatement" column="share_statement" jdbcType="BIT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="views" column="views" jdbcType="INTEGER"/>
+        <result property="typeId" column="type_id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="commentCount" column="comment_count" jdbcType="INTEGER"/>
         <association property="type" javaType="com.wuxianggujun.wuxiangblog.entity.Type">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
         </association>
     </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,appreciation,commentabled,
+        content,create_time,description,
+        first_picture,flag,published,
+        recommend,share_statement,title,
+        update_time,views,type_id,
+        user_id,comment_count
+    </sql>
 
     <!--    <select id="listBlogs" resultMap="blog">-->
     <!--        select b.id,-->
@@ -55,33 +66,16 @@
     <!--        order by b.create_time desc-->
     <!--    </select>-->
 
-    <select id="searchBlogs" resultType="com.wuxianggujun.wuxiangblog.pojo.SearchBlog" resultMap="blog">
-        <bind name="pattern" value="'%'+title+'%'"/>
-        SELECT b.id, b.create_time,b.first_picture,
-        b.recommend, b.title,b.type_id,t.id, t.name FROM wuxiangblog.t_blog b,wuxiangblog.t_type t
-        <where>
-            <if test="1 == 1">
-                b.type_id =t.id
-            </if>
-            <if test="typeId != null">
-                and b.type_id = #{typeId}
-            </if>
-            <if test="title != null">
-                and b.title like #{pattern}
-            </if>
-        </where>
-    </select>
-
     <select id="list" resultType="com.wuxianggujun.wuxiangblog.vo.SearchBlogVo">
-        select tb.id ,
-        tb.create_time,
-        tb.recommend ,
-        tb.title,
-        tt.name
-        from wuxiangblog.t_blog
-        tb left join
-        wuxiangblog.t_type tt on tb.type_id =tt.id
-        ${ew.customSqlSegment}
+        select tb.id,
+               tb.create_time,
+               tb.recommend,
+               tb.title,
+               tt.name
+        from wuxiangblog.t_blog tb
+                 left join
+             wuxiangblog.t_type tt on tb.type_id = tt.id
+            ${ew.customSqlSegment}
     </select>
 
 </mapper>

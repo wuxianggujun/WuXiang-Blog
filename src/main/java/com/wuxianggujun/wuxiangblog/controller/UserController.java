@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class LoginController {
+public class UserController {
     private UserService userService;
 
 
@@ -66,16 +66,16 @@ public class LoginController {
         } else {
             return ResultGenerator.getFailResult("验证码错误");
         }
-        return ResultGenerator.getSuccessResult(map.get("User"));
+        return ResultGenerator.getSuccessResult("登陆成功!", map.get("User"));
     }
 
     @PostMapping("/register")
     public Result register(@RequestParam String username, @RequestParam String password) {
         Map<String, Object> map = userService.register(username, password);
         if (map.containsKey("error")) {
-            return ResultGenerator.getSuccessResult(map.get("error"));
+            return ResultGenerator.getFailResult((String) map.get("error"));
         }
-        return ResultGenerator.getSuccessResult(map.get("user"));
+        return ResultGenerator.getSuccessResult("注册成功！", map.get("user"));
     }
 
 
