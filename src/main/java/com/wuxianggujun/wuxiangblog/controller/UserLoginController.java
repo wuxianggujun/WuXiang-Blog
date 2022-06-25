@@ -7,7 +7,10 @@ import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.UserService;
 import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -27,44 +30,21 @@ public class UserLoginController {
     @PostMapping(value = "/register")
     public Result registerUser(@RequestBody User user, HttpServletResponse response) {
         Map<String, Object> map = userService.register(user);
-        return getResult(response,"注册成功!", map);
+        return getResult(response, "注册成功!", map);
     }
 
     //封装一下
-    private Result getResult(HttpServletResponse response,String message,Map<String, Object> map) {
+    private Result getResult(HttpServletResponse response, String message, Map<String, Object> map) {
         if (map.containsKey("msg")) {
             return ResultGenerator.getFailResult((String) map.get("msg"));
         }
-        if (map.containsKey("token")){
+        if (map.containsKey("token")) {
             if (StrUtil.isNotBlank((map.get("token").toString()))) {
                 //将token存入Http的header中
                 response.setHeader(JWTUtils.header, (String) map.get("token"));
             }
         }
-        return ResultGenerator.getSuccessResult(message,(User) map.get("user"));
+        return ResultGenerator.getSuccessResult(message, (User) map.get("user"));
     }
-
-    @GetMapping(value = "/status")
-    public Result status() {
-        return ResultGenerator.getSuccessResult();
-    }
-
-    @PostMapping("/login")
-    public Result loginUser(@RequestBody User user, HttpServletResponse response) {
-        Map<String, Object> map = userService.login(user);
-        return getResult(response,"登陆成功！", map);
-    }
-
-//    @PostMapping("/login")
-//    public Result login(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        Map<String, Object> map = userService.login(user);
-//        //将token存入Http的header中
-//        response.setHeader(JWTUtils.header, (String) map.get("token"));
-//        return ResultGenerator.getSuccessResult((User) map.get("user"));
-//    }
-
 
 }

@@ -7,9 +7,10 @@ import java.util.Map;
 
 public interface UserService extends IService<User> {
     //登录
-    Map<String, Object> login(User user);
+    Map<String, Object> login(String username,String password);
 
     //注册
     Map<String,Object> register(User user);
+
 
 }

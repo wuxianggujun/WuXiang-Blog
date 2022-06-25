@@ -25,43 +25,38 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         this.userDao = userMapper;
     }
 
-    @Override
-    public Map<String, Object> login(User user) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        //根据接受用户密码查询数据库
-        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.lambda().eq(User::getUsername, user.getUsername());
-        User userDb = userDao.selectOne(userQueryWrapper);
-        //判断查询的用户数据不为null
-        if (ObjectUtil.isNotNull(userDb)) {
-            if (StrUtil.isEmpty(user.getUsername()) || StrUtil.isEmpty(user.getPassword())) {
-                map.put("msg", "用户名或者密码不能为null");
-                return map;
-            }
-            //密码加密
-            String password = user.getPassword();
-            String digestHex = DigestUtil.md5Hex(password);
-            user.setPassword(digestHex);
+    /**
+     * 使用用户名密码登录
+     * @param username
+     * @param password
+     * @return
+     */
 
-            //再判断userdb与user的数据
-            if (StrUtil.equals(userDb.getUsername(), user.getUsername()) && StrUtil.equals(userDb.getPassword(), user.getPassword())) {
-                //将UserName存入token中
-                String token = JWTUtils.createToken(userDb.getUsername());
-                map.put("user", userDb);
-                map.put("token", token);
-            } else {
-                map.put("user", userDb);
-                map.put("msg", "账号或者密码错误");
-            }
+    @Override
+    public Map<String, Object> login(String username, String password) {
+        Map<String, Object> map = new HashMap<>();
+        //先将密码加密，不然不相等
+        String digestHex = DigestUtil.md5Hex(password);
+        //查询数据库中的用户名和密码
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.lambda().eq(User::getUsername, username);
+        userQueryWrapper.lambda().eq(User::getPassword, digestHex);
+        User user = userDao.selectOne(userQueryWrapper);
+        if (ObjectUtil.isNull(user)) {
+            map.put("error", "用户名或者密码错误!");
             return map;
-        }/**/
-        map.put("msg", "用户不存在");
+        }
+        //将UserName存入token中
+        String token = JWTUtils.createToken(user.getUsername());
+        map.put("user", user);
+        map.put("token", token);
+        map.put("msg", "用户登录成功！");
         return map;
     }
 
     @Override
     public Map<String, Object> register(User user) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         //查询用户名，判断存不存在
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.lambda().eq(User::getUsername, user.getUsername());

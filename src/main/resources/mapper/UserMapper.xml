@@ -19,6 +19,11 @@
         <result property="username" column="username" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="login" resultType="com.wuxianggujun.wuxiangblog.entity.User" resultMap="BaseResultMap">
+
+
+    </select>
+
 
     <!--    <select id="findUserById" parameterType="Long" resultType="com.wuxianggujun.wuxiangblog.entity.User">-->
     <!--        SELECT * FROM wuxiangblog.t_user-->
