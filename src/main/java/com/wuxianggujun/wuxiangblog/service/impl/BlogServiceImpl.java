@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wuxianggujun.wuxiangblog.mapper.BlogMapper;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
-import com.wuxianggujun.wuxiangblog.vo.SearchBlogVo;
+import com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

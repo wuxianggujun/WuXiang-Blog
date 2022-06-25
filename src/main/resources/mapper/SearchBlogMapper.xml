@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wuxianggujun.wuxiangblog.mapper.SearchBlogMapper">
+    <resultMap id="BaseResultMap" type="com.wuxianggujun.wuxiangblog.entity.Blog">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="appreciation" column="appreciation" jdbcType="BIT"/>
+        <result property="commentable" column="commentabled" jdbcType="BIT"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="firstPicture" column="first_picture" jdbcType="VARCHAR"/>
+        <result property="flag" column="flag" jdbcType="VARCHAR"/>
+        <result property="published" column="published" jdbcType="BIT"/>
+        <result property="recommend" column="recommend" jdbcType="BIT"/>
+        <result property="shareStatement" column="share_statement" jdbcType="BIT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="views" column="views" jdbcType="INTEGER"/>
+        <result property="typeId" column="type_id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="commentCount" column="comment_count" jdbcType="INTEGER"/>
+        <association property="type" javaType="com.wuxianggujun.wuxiangblog.entity.Type">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
 
     <!--搜索博客-->
-    <select id="searchBlogs" resultType="com.wuxianggujun.wuxiangblog.vo.SearchBlogVo">
+    <select id="searchBlogs" resultType="com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo">
         select tb.id,
                tb.create_time,
                tb.recommend,
                tb.title,
-               tt.name
+               tt.name,
+               tu.username
         from wuxiangblog.t_blog tb
-                 left join
-             wuxiangblog.t_type tt on tb.type_id = tt.id
+                 left join wuxiangblog.t_type tt on tb.type_id = tt.id
+                 left join wuxiangblog.t_user tu on tb.user_id = tu.id
             ${ew.customSqlSegment}
     </select>
 </mapper>

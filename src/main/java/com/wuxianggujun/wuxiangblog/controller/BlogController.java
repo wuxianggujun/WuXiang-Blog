@@ -5,7 +5,7 @@ import com.wuxianggujun.wuxiangblog.result.Result;
 import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
 import com.wuxianggujun.wuxiangblog.service.SearchBlogService;
-import com.wuxianggujun.wuxiangblog.vo.SearchBlogVo;
+import com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

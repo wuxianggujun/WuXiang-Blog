@@ -1,19 +1,23 @@
-package com.wuxianggujun.wuxiangblog.vo;
+package com.wuxianggujun.wuxiangblog.entity.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import org.springframework.boot.jackson.JsonComponent;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 //@JsonComponent
 public class SearchBlogVo implements Serializable {
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
     @TableField("recommend")
     private String recommend;
     @TableField("title")
@@ -21,6 +25,17 @@ public class SearchBlogVo implements Serializable {
 
     @TableField("name")
     private String name;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @TableField("username")
+    private String username;
 
     public Long getId() {
         return id;
@@ -30,11 +45,11 @@ public class SearchBlogVo implements Serializable {
         this.id = id;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 

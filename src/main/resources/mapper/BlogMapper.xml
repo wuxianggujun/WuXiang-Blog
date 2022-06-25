@@ -66,15 +66,11 @@
     <!--        order by b.create_time desc-->
     <!--    </select>-->
 
-    <select id="list" resultType="com.wuxianggujun.wuxiangblog.vo.SearchBlogVo">
-        select tb.id,
-               tb.create_time,
-               tb.recommend,
-               tb.title,
-               tt.name
+    <select id="list" resultType="com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo">
+        select tb.id, tb.create_time, tb.recommend, tb.title, tt.name, tu.username
         from wuxiangblog.t_blog tb
-                 left join
-             wuxiangblog.t_type tt on tb.type_id = tt.id
+                 left join wuxiangblog.t_type tt on tb.type_id = tt.id
+                 left join wuxiangblog.t_user tu on tb.user_id = tu.id
             ${ew.customSqlSegment}
     </select>
 

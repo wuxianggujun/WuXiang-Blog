@@ -1,7 +1,5 @@
 package com.wuxianggujun.wuxiangblog.entity;
 
-import com.wuxianggujun.wuxiangblog.pojo.DetailedBlog;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,9 +62,7 @@ public class Comment {
     /**
      * 博客
      */
-    private DetailedBlog blog;
-
-
+    //private DetailedBlog blog;
     public Comment() {
     }
 
@@ -158,13 +154,13 @@ public class Comment {
         this.parentComment = parentComment;
     }
 
-    public DetailedBlog getBlog() {
-        return blog;
-    }
-
-    public void setBlog(DetailedBlog blog) {
-        this.blog = blog;
-    }
+//    public DetailedBlog getBlog() {
+//        return blog;
+//    }
+//
+//    public void setBlog(DetailedBlog blog) {
+//        this.blog = blog;
+//    }
 
     @Override
     public String toString() {
@@ -180,7 +176,6 @@ public class Comment {
                 ", parentNickname='" + parentNickname + '\'' +
                 ", replyComments=" + replyComments +
                 ", parentComment=" + parentComment +
-                ", blog=" + blog +
                 '}';
     }
 }
