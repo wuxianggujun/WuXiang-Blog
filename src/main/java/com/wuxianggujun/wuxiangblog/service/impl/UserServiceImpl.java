@@ -83,37 +83,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return map;
     }
 
-    public Map<String, Object> register(User user) {
-        Map<String, Object> map = new HashMap<>();
-        //查询用户名，判断存不存在
-        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.lambda().eq(User::getUsername, user.getUsername());
-        User userDb = userDao.selectOne(userQueryWrapper);
-        //User userDb = userDao.findUserByUserName(user.getUsername());
-        if (ObjectUtil.isNotNull(userDb)) {
-            map.put("msg", "用户已经存在");
-            return map;
-        }
-        if (StrUtil.isNotEmpty(user.getUsername()) && StrUtil.isNotEmpty(user.getPassword())) {
-            //密码加密
-            String password = user.getPassword();
-            String digestHex = DigestUtil.md5Hex(password);
-            user.setPassword(digestHex);
-            //还需要创建注册时间
-
-            int rows = userDao.insert(user);
-            if (rows < 1) {
-                map.put("msg", "数据插入失败！");
-                return map;
-            }
-            //将UserName存入token中
-            String token = JWTUtils.createToken(user.getUsername());
-            map.put("user", user);
-            map.put("token", token);
-        } else {
-            map.put("msg", "用户名或密码不能为null");
-        }
-        return map;
-    }
-
 }
