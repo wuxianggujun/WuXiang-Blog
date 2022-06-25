@@ -51,7 +51,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public Result login(@RequestParam String username,@RequestParam String password, String code, HttpSession session, HttpServletResponse response) {
+    public Result login(@RequestParam String username, @RequestParam String password, String code, HttpSession session, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<>();
         //首先判断验证码正不正确
         String sessionCode = (String) session.getAttribute("code");
@@ -68,5 +68,15 @@ public class LoginController {
         }
         return ResultGenerator.getSuccessResult(map.get("User"));
     }
+
+    @PostMapping("/register")
+    public Result register(@RequestParam String username, @RequestParam String password) {
+        Map<String, Object> map = userService.register(username, password);
+        if (map.containsKey("error")) {
+            return ResultGenerator.getSuccessResult(map.get("error"));
+        }
+        return ResultGenerator.getSuccessResult(map.get("user"));
+    }
+
 
 }

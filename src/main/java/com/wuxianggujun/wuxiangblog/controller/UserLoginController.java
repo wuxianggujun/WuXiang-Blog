@@ -7,8 +7,6 @@ import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.UserService;
 import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,11 +25,11 @@ public class UserLoginController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/register")
-    public Result registerUser(@RequestBody User user, HttpServletResponse response) {
-        Map<String, Object> map = userService.register(user);
-        return getResult(response, "注册成功!", map);
-    }
+//    @PostMapping(value = "/register")
+//    public Result registerUser(@RequestBody User user, HttpServletResponse response) {
+//        Map<String, Object> map = userService.register(user);
+//        return getResult(response, "注册成功!", map);
+//    }
 
     //封装一下
     private Result getResult(HttpServletResponse response, String message, Map<String, Object> map) {

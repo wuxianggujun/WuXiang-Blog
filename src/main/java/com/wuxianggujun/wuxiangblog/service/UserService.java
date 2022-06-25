@@ -10,7 +10,7 @@ public interface UserService extends IService<User> {
     Map<String, Object> login(String username,String password);
 
     //注册
-    Map<String,Object> register(User user);
+    Map<String,Object> register(String username,String password);
 
 
 }
