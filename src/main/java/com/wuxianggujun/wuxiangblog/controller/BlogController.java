@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +59,7 @@ public class BlogController {
     public Result input(@RequestBody Blog blog, HttpServletRequest request) {
         //http的header中获取token
         String token = request.getHeader(JWTUtils.header);
-        Map<String, Object> map = blogService.input(blog,token);
+        Map<String, Object> map = blogService.input(blog, token);
         if (map.containsKey("error")) {
             return ResultGenerator.getFailResult((String) map.get("error"));
         }

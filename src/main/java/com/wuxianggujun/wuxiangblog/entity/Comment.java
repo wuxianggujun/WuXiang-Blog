@@ -1,7 +1,12 @@
 package com.wuxianggujun.wuxiangblog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,6 +15,7 @@ import java.util.List;
  * @author 无相孤君
  * @date 2022/06/17
  */
+@TableName("t_comment")
 public class Comment {
     /**
      * id
@@ -35,7 +41,9 @@ public class Comment {
     /**
      * 创建时间
      */
-    private Date createTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    private LocalDateTime createTime;
 
     /**
      * 博客id
@@ -106,11 +114,11 @@ public class Comment {
         this.avatar = avatar;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
