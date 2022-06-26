@@ -1,13 +1,10 @@
 package com.wuxianggujun.wuxiangblog.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wuxianggujun.wuxiangblog.entity.Blog;
-import com.wuxianggujun.wuxiangblog.entity.User;
 import com.wuxianggujun.wuxiangblog.mapper.BlogMapper;
 import com.wuxianggujun.wuxiangblog.mapper.UserMapper;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
-import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,16 +31,16 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     public Map<String, Object> input(Blog blog, String token) {
         Map<String, Object> map = new HashMap<>();
-        //验证token拿到用户名和密码
-        String username = JWTUtils.validateToken(token);
-        //通过查询得到user对象
-        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-        userQueryWrapper.lambda().eq(User::getUsername, username);
-
-        User user = userDao.selectOne(userQueryWrapper);
-
-        blog.setUser(user);
-        blog.setUserId(user.getId());
+//        //验证token拿到用户名和密码
+//        String username = JWTUtils.validateToken(token);
+//        //通过查询得到user对象
+//        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+//        userQueryWrapper.lambda().eq(User::getUsername, username);
+//
+//        User user = userDao.selectOne(userQueryWrapper);
+//
+//        blog.setUser(user);
+//        blog.setUserId(user.getId());
         blog.setCreateTime(LocalDateTime.now());
 
         int rows = blogDao.insert(blog);
