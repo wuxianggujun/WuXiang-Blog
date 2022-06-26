@@ -1,13 +1,10 @@
 package com.wuxianggujun.wuxiangblog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo;
+import com.wuxianggujun.wuxiangblog.entity.Blog;
 
-import java.util.List;
+import java.util.Map;
 
-public interface BlogService extends IService<SearchBlogVo> {
-
-    List<SearchBlogVo> searchBlog(String title);
-
-
+public interface BlogService extends IService<Blog> {
+   Map<String,Object> input(Blog blog, String token);
 }

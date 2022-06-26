@@ -1,15 +1,19 @@
 package com.wuxianggujun.wuxiangblog.controller;
 
 import com.wuxianggujun.wuxiangblog.entity.Blog;
+import com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo;
 import com.wuxianggujun.wuxiangblog.result.Result;
 import com.wuxianggujun.wuxiangblog.result.ResultGenerator;
 import com.wuxianggujun.wuxiangblog.service.BlogService;
 import com.wuxianggujun.wuxiangblog.service.SearchBlogService;
-import com.wuxianggujun.wuxiangblog.entity.vo.SearchBlogVo;
+import com.wuxianggujun.wuxiangblog.util.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/blog")
@@ -47,4 +51,19 @@ public class BlogController {
         return null;
     }
 
+    /**
+     * 新增博客
+     *
+     * @return
+     */
+    @PostMapping("/input")
+    public Result input(@RequestBody Blog blog, HttpServletRequest request) {
+        //http的header中获取token
+        String token = request.getHeader(JWTUtils.header);
+        Map<String, Object> map = blogService.input(blog,token);
+        if (map.containsKey("error")) {
+            return ResultGenerator.getFailResult((String) map.get("error"));
+        }
+        return ResultGenerator.getSuccessResult((String) map.get("msg"), map.get("result"));
+    }
 }
